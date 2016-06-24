@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>智慧社区 | 理想杯</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/AdminLTE.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/skins/skin-blue-light.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/style.css') }}">
+    <style type="text/css">
+      a {
+        cursor: pointer;
+      }
+      label {
+        max-width: none;
+
+      }
+      p .tip{
+        margin: 20px 0 10px;
+      }
+
+      blockquote {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body class="hold-transition skin-blue-light sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Modal -->
+        <div class="modal fade" id="search" tabindex="-1" role="dialog"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">搜索</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group input-group-lg">
+                            <input type="text" class="form-control">
+                            <span class="input-group-btn">
+                              <button class="btn btn-info btn-flat" type="button" id="go">GO!</button>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+      <div class="modal fade" id="degree" tabindex="-1" role="dialog" aria-hidden="true" >
+        <div class="modal-dialog" style="width: 800px">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title">流量</h4>
+            </div>
+            <div class="modal-body" id="degree-body">
+
+            </div>
+
+          </div>
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <header class="main-header">
+        <a href="#" class="logo">
+          <span class="logo-lg"><b>智慧社区</b></span>
+        </a>
+        <nav class="navbar navbar-static-top" role="navigation">
+          <ul class="nav navbar-nav">
+            <li><a id="reset">复位</a></li>
+            <li><a data-toggle="modal" data-target="#degree">流量</a></li>
+            <li><a id="stations">区域</a></li>
+            <li><a data-toggle="modal" data-target="#search">搜索</a></li>
+            <li><a id="about">关于</a></li>
+          </ul>
+
+        </nav>
+      </header>
+
+      <div class="content-wrapper" style="margin-left: 0">
+        <section class="content" style="padding-bottom: 0">
+            <div class="row">
+                <section class="col-lg-9 connectedSortable ui-sortable">
+                    <div class="box box-success">
+                        <div id="main-panel" class="box-body" style="height: 780px; padding: 0px">
+                            <div class="box-body" id="map" style="height: 780px"></div>
+                        </div><!-- /.box-body -->
+                    </div>
+                </section>
+
+
+                <section class="col-lg-3 connectedSortable ui-sortable">
+                    <div class="box box-warning box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title" id="info-title">关于</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body" style="height: 740px;">
+                            <div id="info-panel" hidden>
+                                <blockquote id="people"><p>人群构成</p></blockquote>
+                                <div id="pie"></div>
+
+                                <h4 class="text-aqua"></h4>
+
+
+                                <blockquote id="ideas"><p>想法流</p></blockquote>
+                                <div id="chart" hidden></div>
+                                <h4 class="text-aqua"></h4>
+                                <blockquote><p>周边设施</p></blockquote>
+                                <div id="suggest" class="row placeholders" style="padding-right: 10px;">
+
+                                    <div class="col-xs-6 col-sm-3 placeholder" id="shop" hidden>
+                                        <a class="btn btn-app">
+                                            <span class="badge bg-green">3</span>
+                                            <i class="fa fa-shopping-cart"></i> 超市
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3 placeholder" id="clinic" hidden>
+                                        <a class="btn btn-app">
+                                            <span class="badge bg-green">4</span>
+                                            <i class="fa fa-heartbeat"></i> 医院
+                                        </a>
+                                    </div>
+
+                                    <div class="col-xs-6 col-sm-3 placeholder" id="bank" hidden>
+                                        <a class="btn btn-app">
+                                            <span class="badge bg-green">2</span>
+                                            <i class="fa fa-bank"></i> 银行
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3 placeholder" id="restaurant" hidden>
+                                        <a class="btn btn-app">
+                                            <span class="badge bg-green">1</span>
+                                            <i class="fa fa-cutlery"></i>餐饮
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="about-panel">
+                                <blockquote><p>智慧社区</p></blockquote>
+                                <h2>“智慧社区”网站致力于为上海市社区商业规划建设提供指导。我们为您提供上海市各生活区工作区的:</br></br>
+                                  <ul>
+                                    <li>人口流动数据</li>
+                                    <li>区域人群精准划分</li>
+                                    <li>区域想法流</li>
+                                    <li>周边基础设施建设一览</li>
+                                  </ul>
+                                  </br></br>精细掌握区域人口构成、实时了解区域人群喜好，为社区商业规划建设提供精准指导。</h2>
+
+                            </div>
+                            <div class="spinner" id="spin" hidden></div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </section>
+      </div>
+      <footer class="main-footer" style="margin-left: 0">
+        <div class="pull-right hidden-xs">
+          <a href="http://www.seeleit.com" target="_black">POWERED BY HT</a>
+        </div>
+        <strong>Copyright &copy; 2016 <a href="http://cnc.sjtu.edu.cn" target="_black">CNC</a>.</strong> All rights reserved.
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    <script src="https://code.highcharts.com/modules/treemap.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=QdzoydNb3Ix9Qfik2sbRrOfm"></script>
+    <script src="{{ url_for('static', filename='dist/js/map.js') }}" charset="UTF-8"></script>
+  </body>
+</html>
