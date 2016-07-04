@@ -13,12 +13,12 @@ from flask import Flask, render_template, jsonify, request
 from init import app, STAT_INFO, logger
 
 
+# @app.route('/')
+# def welcome():
+#     return render_template('welcome.html')
+
+
 @app.route('/')
-def welcome():
-    return render_template('welcome.html')
-
-
-@app.route('/map')
 def map():
     logger.info('('+request.remote_addr+')')
     return render_template('index.html')

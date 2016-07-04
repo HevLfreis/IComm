@@ -36,9 +36,6 @@ function getInfo(pt) {
                 "双休日最大人流量: "+result.max67+"</p>", opts);
         }
 
-
-
-
         label.setStyle({
             color : "white",
             border: "3px solid white",
@@ -86,17 +83,11 @@ function getInfo(pt) {
         //console.log($('#info-panel').width());
 
         $('.btn-app').css('min-width', $('#info-panel').width() / 5.2);
-
-
-
     });
-
-
 }
 
 var colors = ["#7cb5ec", "#f7a35c", "#90ee7e", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
     "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"];
-
 
 function pie(r) {
 
@@ -147,7 +138,6 @@ function pie(r) {
                     sliced: true,
                     selected: true
                 },
-
             ]
         }]
     });
@@ -182,8 +172,6 @@ function chart(d) {
                 fontFamily: '微软雅黑'
             }
         },
-
-
         series: [{
             type: 'treemap',
             layoutAlgorithm: 'squarified',
@@ -204,20 +192,8 @@ function dateLine(d){
     var daydata = [];
     var hourdata = [];
 
-    var hourcat = [];
-    //for (var i = 0;i < 24; i++) hourcat.push(String.valueOf(i));
-
     $.each(d, function(i , ele) {
-
-        if (ele == 0) {
-            //daydata.push({
-            //    name: "May "+i,
-            //    y: 0,
-            //    //drilldown: i
-            //});
-        }
-
-        else {
+        if (ele !== 0) {
             daydata.push({
                 name: "5."+i,
                 y: parseInt(ele.aver),
@@ -238,9 +214,6 @@ function dateLine(d){
 
             })
         }
-
-
-
     });
 
     //console.log(daydata, hourdata);
@@ -271,11 +244,8 @@ function dateLine(d){
                 text:'时间',
                 //align: 'high',
             },
-
-
             categories: []
         },
-
 
         yAxis: {
             min: 0,
@@ -293,11 +263,6 @@ function dateLine(d){
             colorByPoint: true,
             data: daydata
         },
-            //    {
-            //    name: 'Max People',
-            //    type: 'spline',
-            //    data: daydata
-            //}
         ],
         drilldown: {
             series: hourdata
@@ -305,9 +270,7 @@ function dateLine(d){
         credits: {
             enabled: false
         },
-
     });
-
 }
 
 
@@ -319,7 +282,6 @@ function create_map(){
 
     map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
 
-
     var geoc = new BMap.Geocoder();
 
     map.addEventListener("click", function(e){
@@ -327,9 +289,6 @@ function create_map(){
         $('#suggest').find("div").each(function(){
             $(this).hide();
         });
-
-
-
         var pt = e.point;
         geoc.getLocation(pt, function(rs){
 
@@ -346,7 +305,6 @@ var map = null;
 var infoPanelHide = true;
 
 create_map();
-
 
 $('#people').click(function() {
     $('#pie').show();
@@ -382,8 +340,6 @@ $('#degree').on('show.bs.modal', function (e) {
 });
 
 
-
-
 $('#stations').click(function() {
     if (document.createElement('canvas').getContext) {  // 判断当前浏览器是否支持绘制海量点
         var points = [];  // 添加海量点数据
@@ -397,9 +353,6 @@ $('#stations').click(function() {
                 //console.debug(k+" "+v[0]+" "+v[1]);
                     points.push(new BMap.Point(parseFloat(v[0]), parseFloat(v[1])));
             });
-
-            //console.log(points.length);
-
 
             var options = {
                 size: BMAP_POINT_SIZE_SMALL,
@@ -432,7 +385,7 @@ $('#about').click(function() {
 });
 
 
-function searchlocation(e) {
+function searchLocation(e) {
     map.clearOverlays();
     var options = {
         onSearchComplete: function(results){
@@ -458,13 +411,13 @@ function searchlocation(e) {
 
 $(document).keydown(function (event) {
     if (event.keyCode == 13) {
-        searchlocation($('input').val());
+        searchLocation($('input').val());
     }
 });
 
 
 $('#go').click(function() {
-    searchlocation($('input').val());
+    searchLocation($('input').val());
 });
 
 
