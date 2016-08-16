@@ -1,5 +1,5 @@
 # IComm
-Intelligent Community: Project for Lixiang Cup Data Contest of China Telecom (Second Place) 
+Intelligent Community: Project for Lixiang Cup Data Contest of China Telecom (Second Place)  
 Location: http://ic.seeleit.com/  
 Better browsing performance with desktop browsers
 
